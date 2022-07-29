@@ -32,16 +32,24 @@
 // technique: hashmap
 // time complexity: O(n)
 // space complexity: O(n)
-var containsDuplicate = function (nums) {
-  const numHash = new Set();
-  for (let index = 0; index < nums.length; index++) {
-    if (numHash.has(nums[index])) return true;
-    numHash.add(nums[index]);
-  }
-  return false;
-};
+// var containsDuplicate = function (nums) {
+//   const numHash = new Set();
+//   for (let index = 0; index < nums.length; index++) {
+//     if (numHash.has(nums[index])) return true;
+//     numHash.add(nums[index]);
+//   }
+//   return false;
+// };
 
-// best solution
+// one line solution
+// making new unique array and comparing sizes
+// technique: hashmap and Set
+// time complexity: O(n)
+// space complexity: O(n)
+var containsDuplicate = function (nums) {
+  return new Set(nums).size != nums.length;
+  // return false;
+};
 
 console.log(containsDuplicate([1, 2, 3, 1]));
 
