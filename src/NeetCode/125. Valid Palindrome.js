@@ -3,34 +3,41 @@
  * @return {boolean}
  */
 
-// brute force
-// time complexity: O(n^2)
-// space complexity: it's using extra spaces
+// technique: constant memory
 var isPalindrome = function (s) {
-  const alphaNumericString = s
-    .toLowerCase()
-    .replaceAll(" ", "")
-    .replace(/[^a-z0-9]/gi, "");
-
-  //   console.log(alphaNumericString.length);
-  //   console.log(Math.floor(alphaNumericString.length / 2));
-  for (
-    let i = 0, j = alphaNumericString.length - 1;
-    i < alphaNumericString.length / 2;
-    i++, j--
-  ) {
-    if (alphaNumericString[i] !== alphaNumericString[j]) return false;
-    // console.log(`alphaNumericString[${i}] [i] === ${alphaNumericString[i]}`);
-    // console.log(`alphaNumericString[${j}] [j] === ${alphaNumericString[j]}`);
+  const ALPHA_NUM = /^[a-zA-Z0-9]$/;
+  let leftIndex = 0;
+  let rightIndex = s.length - 1;
+  while (leftIndex < rightIndex) {
+    while (leftIndex < rightIndex && !ALPHA_NUM.test(s[leftIndex])) {
+      leftIndex++;
+    }
+    while (leftIndex < rightIndex && !ALPHA_NUM.test(s[rightIndex])) {
+      rightIndex--;
+    }
+    if (s[leftIndex].toLowerCase() !== s[rightIndex].toLowerCase())
+      return false;
+    leftIndex++;
+    rightIndex--;
   }
   return true;
-  //   console.log(
-  //     s
-  //       .toLowerCase()
-  //       .replaceAll(" ", "")
-  //       .replace(/[^a-z0-9]/gi, "")
-  //   );
 };
+
+// technique: using extra memory
+// var isPalindrome = function (s) {
+//   const alphaNumericString = s
+//     .toLowerCase()
+//     .replaceAll(" ", "")
+//     .replace(/[^a-z0-9]/gi, "");
+//   for (
+//     let i = 0, j = alphaNumericString.length - 1;
+//     i < alphaNumericString.length / 2;
+//     i++, j--
+//   ) {
+//     if (alphaNumericString[i] !== alphaNumericString[j]) return false;
+//   }
+//   return true;
+// };
 
 console.log(
   isPalindrome("A man, a plan, a canal: Pan                               ama")
