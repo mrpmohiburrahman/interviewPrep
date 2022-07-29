@@ -19,14 +19,29 @@
 // technique: sorting, then comparing adjacent arrays
 // time complexity: O(nlogn) // nlogn is for sorting function. skipping the n complexity for one pass for checking duplicates
 // space complexity: O(1)
+// var containsDuplicate = function (nums) {
+//   nums.sort();
+//   console.log(nums);
+//   for (let index = 0; index < nums.length - 1; index++) {
+//     if (nums[index] === nums[index + 1]) return true;
+//   }
+//   return false;
+// };
+
+// if we can use space a little bit
+// technique: hashmap
+// time complexity: O(n)
+// space complexity: O(n)
 var containsDuplicate = function (nums) {
-  nums.sort();
-  console.log(nums);
-  for (let index = 0; index < nums.length - 1; index++) {
-    if (nums[index] === nums[index + 1]) return true;
+  const numHash = new Set();
+  for (let index = 0; index < nums.length; index++) {
+    if (numHash.has(nums[index])) return true;
+    numHash.add(nums[index]);
   }
   return false;
 };
+
+// best solution
 
 console.log(containsDuplicate([1, 2, 3, 1]));
 
