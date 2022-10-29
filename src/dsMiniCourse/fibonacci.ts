@@ -1,7 +1,23 @@
+// function fib(n: number): number {
+//   if (n === 0) return 0;
+//   if (n === 1) return 1;
+//   return fib(n - 1) + fib(n - 2);
+// }
+
 function fib(n: number): number {
-  if (n === 0) return 0;
-  if (n === 1) return 1;
-  return fib(n - 1) + fib(n - 2);
+  // memoization
+  const fibArray: number[] = [0, 1];
+  const caluculateFib = (nS: number) => {
+    if (nS === 0) return 0;
+    if (fibArray[nS] !== undefined) return fibArray[nS];
+
+    let f1 = caluculateFib(nS - 1);
+    let f2 = caluculateFib(nS - 2);
+    fibArray[nS] = f1 + f2;
+    return fibArray[nS];
+  };
+  const result = caluculateFib(n);
+  return result;
 }
 
 console.log(fib(2));
